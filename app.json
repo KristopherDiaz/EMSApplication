@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "EMSApp",
+    "slug": "EMSApp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/iconEMS.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splashh.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/iconEMS.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
