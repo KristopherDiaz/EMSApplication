@@ -14,6 +14,7 @@ const HomePage = () => {
   };
 
   return (
+    //Diaz Pogi
     // initializng function for changing tabs
     <View 
     style={styles.container}>
