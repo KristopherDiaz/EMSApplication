@@ -1,9 +1,23 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet, Image, TextInput, Button, ScrollView, SafeAreaView} from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, Image, TextInput, Button, ScrollView, SafeAreaView, Linking} from 'react-native';
 import { StatusBar } from 'react-native';
 
 
 const HomePage = () => {
+  const handleImageClick = () => {
+  const url = 'https://goo.gl/maps/wLokbxuYFiDeHbsz7';
+    Linking.openURL(url).catch((error) => console.error('Error opening URL: ', error));
+    };
+    const handleImageClick2 = () => {
+      const url = 'https://goo.gl/maps/L428Sv21yboe21yK8';
+        Linking.openURL(url).catch((error) => console.error('Error opening URL: ', error));
+        };
+        const handleImageClick3 = () => {
+          const url = 'https://goo.gl/maps/fKeXeqm7A3ZFVs1TA';
+            Linking.openURL(url).catch((error) => console.error('Error opening URL: ', error));
+            };
+        
+
   const [activeTab, setActiveTab] = useState('Tab1');
   const [Name, setName] = useState('');
   const [Age, setAge] = useState('');
@@ -13,102 +27,109 @@ const HomePage = () => {
 
   const handleTabPress = (tab) => {
     setActiveTab(tab);
-    
   };
 
-  
+    
   return (
     // initializng function for changing tabs
-  
-    <View 
-      style={styles.container}>
-  <SafeAreaView>
-      <View style={styles.tabDrawer}>
-      
-        <TouchableOpacity
-          style={[styles.tab, activeTab === 'Tab1' && styles.activeTab]}
-          onPress={() => handleTabPress('Tab1')}
-        >
-          <Text style={styles.tabText}>FEATURES</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.tab, activeTab === 'Tab2' && styles.activeTab]}
-          onPress={() => handleTabPress('Tab2')}
-        >
-          <Text style={styles.tabText}>REQUEST RESCUERS</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.tab, activeTab === 'Tab3' && styles.activeTab]}
-          onPress={() => handleTabPress('Tab3')}
-        >
-          <Text style={styles.tabText}>ABOUT</Text>
-        </TouchableOpacity>
-        <StatusBar style="auto"/>
+      <View 
+        style={styles.container}>
+        
+<SafeAreaView>
+        <View style={styles.tabDrawer}>
+        
+          <TouchableOpacity
+            style={[styles.tab, activeTab === 'Tab1' && styles.activeTab]}
+            onPress={() => handleTabPress('Tab1')}
+          >
+            <Text style={styles.tabText}>FEATURES</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.tab, activeTab === 'Tab2' && styles.activeTab]}
+            onPress={() => handleTabPress('Tab2')}
+          >
+            <Text style={styles.tabText}>REQUEST RESCUERS</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.tab, activeTab === 'Tab3' && styles.activeTab]}
+            onPress={() => handleTabPress('Tab3')}
+          >
+            <Text style={styles.tabText}>ABOUT</Text>
+          </TouchableOpacity>
+          <StatusBar style="auto"/>
 
-      </View>
+        </View>
+        
 </SafeAreaView>
       {/* Calling the function for changing tabs */}
       <View style={styles.tabContent}>
-
+          
         {activeTab === 'Tab1' && (
-          <ScrollView>
-          <View>
-            <Text
-            style={styles.textEVAC}>EVACUATION SITES:{'\n'}{'\n'} </Text>
-            <Text style={styles.imagesLabel}>RODRIGUEZ EVACUATION CENTER</Text>
-            <Image style={styles.image}
-            source={require('../assets/3.jpg')}>
-              
-            </Image>
-            <Text style={styles.imagesLabel}>{'\n'}KASIGLAHAN VILLAGE NATIONAL HIGH SCHOOL</Text>
-            <Image style={styles.image2}
-              source={require('../assets/4.jpg')}
-            /> 
-            <Text style={styles.imagesLabel}>{'\n'}KASIGLAHAN SENIOR HIGH SCHOOL</Text>
-             <Image style={styles.image3}
-              source={require('../assets/5.png')}
-            /> 
-          </View>
-          </ScrollView>
-        )}
+              <ScrollView>
+        
+                    <View>
+                      <Text style={styles.imagesLabel}>RODRIGUEZ EVACUATION CENTER</Text>
+                      <TouchableOpacity onPress={handleImageClick}>
+                      <Image style={styles.image}
+                      source={require('../assets/3.jpg')}>
+                      </Image></TouchableOpacity>
 
+                      <Text style={styles.imagesLabel}>{'\n'}KASIGLAHAN VILLAGE NATIONAL HIGH SCHOOL</Text>
+                      <TouchableOpacity onPress={handleImageClick2}>
+                      <Image style={styles.image2}
+                        source={require('../assets/4.jpg')}>
+                      </Image></TouchableOpacity>
+                      
+                      <Text style={styles.imagesLabel}>{'\n'}KASIGLAHAN SENIOR HIGH SCHOOL</Text>
+                      <TouchableOpacity onPress={handleImageClick3}>
+                      <Image style={styles.image3}
+                        source={require('../assets/5.png')}>
+                      </Image> 
+                      </TouchableOpacity>
+                    </View>
+
+              </ScrollView>
+        )}
+        
         {activeTab === 'Tab2' && (
           
-          <View>
-          <Text style={styles.textREQ}>REQUEST RESCUERS{'\n'}{'\n'}{'\n'}</Text>
-
-          <Text style={styles.TILabel}>Enter name:</Text>
+      <View>
+          <ScrollView>
+            <Text style={styles.TILabel}>Enter name:</Text>
             <TextInput 
             style={styles.input}
             placeholder='ex. Juan Dela Cruz'
-            onChangeText={(val) => setName(val)}/>
-
+            onChangeText={(val) => setName(val)}/><Text style={styles.uState}>name: {Name}</Text>
+          
              <Text style={styles.TILabel}>Enter age:</Text>
                 <TextInput 
                   style={styles.input}
                   placeholder='ex. 40'
-                  onChangeText={(val) => setAge(val)}/>
+                  onChangeText={(val) => setAge(val)}/><Text style={styles.uState}>age: {Age}</Text>
 
                     <Text style={styles.TILabel}>Enter address:</Text>
                        <TextInput 
                         style={styles.input}
                         placeholder='ex. Blk1 Lot999'
-                        onChangeText={(val) => setAddress(val)}/>
+                        onChangeText={(val) => setAddress(val)}/><Text style={styles.uState}>address: {Address}</Text>
 
                           <Text style={styles.TILabel}>Enter contact #:</Text>
                             <TextInput 
                               style={styles.input}
                               placeholder='ex. 09123456789'
-                              onChangeText={(val) => setContact(val)}/>
+                              onChangeText={(val) => setContact(val)}/><Text style={styles.uState}>contact: {Contact}</Text>
 
-                <Text>name: {Name}, age: {Age}, address: {Address}, contact: {Contact}{'\n'}{'\n'}{'\n'}{'\n'}</Text>
                 <Button title="Send Request" color = '#7574cf'/>
-            
-          </View>
+           
+                <Text>{'\n'}{'\n'}{'\n'}</Text>
+                <Text style={styles.textREQ}>NOTE: THIS PAGE IS FOR REQUESTING RESCUERS ONLY!</Text>
+                    
+          </ScrollView>
+      </View>
           
         )}
         {activeTab === 'Tab3' && (
-          <View>
+          <View><ScrollView>
             <Text style={styles.MISSION}>MISSION</Text>
             <Text style={styles.Mpara}>
               Our mission is to ensure the safety and well-being of individuals, communities, and organizations through effective evacuation management. We are dedicated to providing comprehensive solutions and services that prioritize emergency preparedness, minimize risks, and facilitate efficient and secure evacuations during critical situations."
@@ -130,6 +151,7 @@ const HomePage = () => {
             <Text>Contact#: 09187883325</Text>
             <Text>Email: evacuation.managementSystem@gmail.com</Text>
             <Text>Facebook: EMS!</Text>
+            </ScrollView>
           </View>
         )}
       </View>
@@ -188,8 +210,7 @@ Imppara:{
   activeTab: {
     borderBottomColor: 'blue',
     borderBottomWidth: 2,
-    position: 'relative',
-    alignItems: 'center',
+
   },
   tabText: {
     fontSize: 16,
@@ -198,40 +219,41 @@ Imppara:{
   },
   tabContent: {
     flex: 1,
-    padding: 20,
-    position: 'relative',
-    alignItems: 'center'
+    padding: 50,
 
   },
-  image: {
-    height: 150,
-    width: 150,
-    marginTop: 10,
-    width: 320,
-    borderRadius: 20,
-    alignItems: 'center',
-  },
+
   textEVAC: {
     fontSize: 17,
     fontWeight: 'bold',
   },
-  image2: {
-    height: 150,
-    width: 150,
+
+  image: {
+    height: 210,
+    width: 300,
     marginTop: 10,
-    width: 320,
+    marginBottom: 20,
+    borderRadius: 20,
+    alignItems: 'center',
+  },
+
+  image2: {
+    height: 210,
+    width: 300,
+    marginTop: 10,
+    marginBottom: 20,
     borderRadius: 20,
     alignItems: 'center',
   },
 
   image3: {
-    height: 150,
-    width: 150,
+    height: 210,
+    width: 300,
     marginTop: 10,
-    width: 320,
     borderRadius: 20,
     alignItems: 'center',
   },
+  
   imagesLabel:{
     fontSize: 14,
     fontWeight: 'bold',
@@ -241,7 +263,8 @@ Imppara:{
 
   TILabel:{
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+
   },
   
   input: {
@@ -252,10 +275,11 @@ Imppara:{
     width: 300,
   },
   textREQ:{
-    fontSize: 17,
-    fontWeight: 'bold',
+    fontSize: 14,
 },
-
+uState: {
+    textAlign: 'left',
+},
 });
 
 export default HomePage;

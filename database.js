@@ -28,4 +28,3 @@ collection.insertOne(document, (err, result) => {
     console.log('Document inserted successfully:', result.insertedId);
   }
 });
-
