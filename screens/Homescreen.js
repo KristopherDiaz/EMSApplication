@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet, Image, TextInput, Button} from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, Image, TextInput, Button, ScrollView, SafeAreaView} from 'react-native';
 import { StatusBar } from 'react-native';
+
 
 const HomePage = () => {
   const [activeTab, setActiveTab] = useState('Tab1');
@@ -9,16 +10,21 @@ const HomePage = () => {
   const [Address, setAddress] = useState('');
   const [Contact, setContact] = useState('');
 
+
   const handleTabPress = (tab) => {
     setActiveTab(tab);
+    
   };
 
+  
   return (
     // initializng function for changing tabs
+  
     <View 
-    style={styles.container}>
-    <StatusBar style="auto"/>
+      style={styles.container}>
+  <SafeAreaView>
       <View style={styles.tabDrawer}>
+      
         <TouchableOpacity
           style={[styles.tab, activeTab === 'Tab1' && styles.activeTab]}
           onPress={() => handleTabPress('Tab1')}
@@ -37,11 +43,15 @@ const HomePage = () => {
         >
           <Text style={styles.tabText}>ABOUT</Text>
         </TouchableOpacity>
-      </View>
+        <StatusBar style="auto"/>
 
+      </View>
+</SafeAreaView>
       {/* Calling the function for changing tabs */}
       <View style={styles.tabContent}>
+
         {activeTab === 'Tab1' && (
+          <ScrollView>
           <View>
             <Text
             style={styles.textEVAC}>EVACUATION SITES:{'\n'}{'\n'} </Text>
@@ -59,9 +69,11 @@ const HomePage = () => {
               source={require('../assets/5.png')}
             /> 
           </View>
+          </ScrollView>
         )}
 
         {activeTab === 'Tab2' && (
+          
           <View>
           <Text style={styles.textREQ}>REQUEST RESCUERS{'\n'}{'\n'}{'\n'}</Text>
 
@@ -121,7 +133,9 @@ const HomePage = () => {
           </View>
         )}
       </View>
+
     </View>
+ 
   );
 };
 
@@ -129,6 +143,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#cccee3',
+    position: 'relative',
+
   },
   MISSION: {
     fontSize: 25,
@@ -172,14 +188,20 @@ Imppara:{
   activeTab: {
     borderBottomColor: 'blue',
     borderBottomWidth: 2,
+    position: 'relative',
+    alignItems: 'center',
   },
   tabText: {
     fontSize: 16,
     fontWeight: 'bold',
+    
   },
   tabContent: {
     flex: 1,
     padding: 20,
+    position: 'relative',
+    alignItems: 'center'
+
   },
   image: {
     height: 150,
@@ -219,7 +241,6 @@ Imppara:{
 
   TILabel:{
     fontWeight: 'bold',
-    fontFamily: 'sans-serif-light',
     textAlign: 'center'
   },
   
