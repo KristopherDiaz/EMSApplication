@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet, Image, TextInput, Button, ScrollView, SafeAreaView, Linking} from 'react-native';
+import { View, 
+  TouchableOpacity, 
+  Text, 
+  StyleSheet, 
+  Image, 
+  TextInput, 
+  Button, 
+  ScrollView, 
+  SafeAreaView, 
+  Linking} from 'react-native';
 import { StatusBar } from 'react-native';
 
 
@@ -16,14 +25,20 @@ const HomePage = () => {
           const url = 'https://goo.gl/maps/fKeXeqm7A3ZFVs1TA';
             Linking.openURL(url).catch((error) => console.error('Error opening URL: ', error));
             };
-        
+            const handleImageClick4 = () => {
+              const url = 'https://goo.gl/maps/7R5poj6BDnwNRmne9';
+                Linking.openURL(url).catch((error) => console.error('Error opening URL: ', error));
+                };
+                const handleImageClick5 = () => {
+                  const url = 'https://goo.gl/maps/EJb4FLxTX4mcabhx8';
+                    Linking.openURL(url).catch((error) => console.error('Error opening URL: ', error));
+                    };
 
   const [activeTab, setActiveTab] = useState('Tab1');
   const [Name, setName] = useState('');
   const [Age, setAge] = useState('');
   const [Address, setAddress] = useState('');
   const [Contact, setContact] = useState('');
-
 
   const handleTabPress = (tab) => {
     setActiveTab(tab);
@@ -73,6 +88,7 @@ const HomePage = () => {
                       <Image style={styles.image}
                       source={require('../assets/3.jpg')}>
                       </Image></TouchableOpacity>
+                     
 
                       <Text style={styles.imagesLabel}>{'\n'}KASIGLAHAN VILLAGE NATIONAL HIGH SCHOOL</Text>
                       <TouchableOpacity onPress={handleImageClick2}>
@@ -86,6 +102,21 @@ const HomePage = () => {
                         source={require('../assets/5.png')}>
                       </Image> 
                       </TouchableOpacity>
+
+                      <Text style={styles.imagesLabel}>{'\n'}BURGOS ELEMENTARY SCHOOL</Text>
+                      <TouchableOpacity onPress={handleImageClick4}>
+                      <Image style={styles.image4}
+                        source={require('../assets/6.png')}>
+                      </Image> 
+                      </TouchableOpacity>
+
+                      <Text style={styles.imagesLabel}>{'\n'}SAN JOSE ELEMENTARY SCHOOL</Text>
+                      <TouchableOpacity onPress={handleImageClick5}>
+                      <Image style={styles.image5}
+                        source={require('../assets/7.png')}>
+                      </Image> 
+                      </TouchableOpacity>
+
                     </View>
 
               </ScrollView>
@@ -250,9 +281,29 @@ Imppara:{
     height: 210,
     width: 300,
     marginTop: 10,
+    marginBottom: 20,
     borderRadius: 20,
     alignItems: 'center',
   },
+
+  image4: {
+    height: 210,
+    width: 300,
+    marginTop: 10,
+    marginBottom: 20,
+    borderRadius: 20,
+    alignItems: 'center',
+  },
+  image5: {
+    height: 210,
+    width: 300,
+    marginTop: 10,
+    marginBottom: 20,
+    borderRadius: 20,
+    alignItems: 'center',
+  },
+  
+  
   
   imagesLabel:{
     fontSize: 14,
@@ -276,6 +327,7 @@ Imppara:{
   },
   textREQ:{
     fontSize: 14,
+    textAlign: 'center',
 },
 uState: {
     textAlign: 'left',

@@ -20,7 +20,7 @@ client.connect((err) => {
 const collection = client.db('SampleDB').collection('Request');
 
 // Insert a document
-const document = { name: 'John Doe', email: 'johndoe@example.com' };
+const document = { name: 'kris', email: 'kris@example.com' };
 collection.insertOne(document, (err, result) => {
   if (err) {
     console.error('Error inserting document:', err);
