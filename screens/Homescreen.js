@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, 
+import { View, ActivityIndicator,
   TouchableOpacity, 
   Text, 
   StyleSheet, 
@@ -11,7 +11,7 @@ import { View,
   Linking} from 'react-native';
 import { StatusBar } from 'react-native';
 
-
+// image with GPS
 const HomePage = () => {
   const handleImageClick = () => {
   const url = 'https://goo.gl/maps/wLokbxuYFiDeHbsz7';
@@ -76,13 +76,14 @@ const HomePage = () => {
         </View>
         
 </SafeAreaView>
+
       {/* Calling the function for changing tabs */}
+
       <View style={styles.tabContent}>
           
         {activeTab === 'Tab1' && (
               <ScrollView>
-        
-                    <View>
+                    <View> 
                       <Text style={styles.imagesLabel}>RODRIGUEZ EVACUATION CENTER</Text>
                       <TouchableOpacity onPress={handleImageClick}>
                       <Image style={styles.image}
@@ -123,7 +124,6 @@ const HomePage = () => {
         )}
         
         {activeTab === 'Tab2' && (
-          
       <View>
           <ScrollView>
             <Text style={styles.TILabel}>Enter name:</Text>
