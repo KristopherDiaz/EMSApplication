@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, ActivityIndicator,
+import axios from 'axios';
+import { View, 
   TouchableOpacity, 
   Text, 
   StyleSheet, 
@@ -13,6 +14,7 @@ import { StatusBar } from 'react-native';
 
 // image with GPS
 const HomePage = () => {
+
   const handleImageClick = () => {
   const url = 'https://goo.gl/maps/wLokbxuYFiDeHbsz7';
     Linking.openURL(url).catch((error) => console.error('Error opening URL: ', error));
@@ -35,15 +37,43 @@ const HomePage = () => {
                     };
 
   const [activeTab, setActiveTab] = useState('Tab1');
-  const [Name, setName] = useState('');
-  const [Age, setAge] = useState('');
-  const [Address, setAddress] = useState('');
-  const [Contact, setContact] = useState('');
+
 
   const handleTabPress = (tab) => {
     setActiveTab(tab);
-  };
+  }; 
+  
+      const [input, setInput] = useState({
+        Name: '', 
+        Age: '',
+        Address: '',
+        Contact: ''
+      })
 
+  
+  function handleChange(event){
+    const {name, value } = event.target;
+    setInput(prevInput => {
+      return{
+        ...prevInput,
+        [name]: value
+      }
+    })
+
+  }
+
+
+  function handleClick(event){
+    event.preventDefault();
+    const newRequest = {
+        Name: input.Name,
+        Age: input.Age,
+        Address: input.Address,
+        Contact: input.Contact
+      
+    }
+    axios.post('http://192.168.1.3:5000/create', newRequest)
+  }
     
   return (
     // initializng function for changing tabs
@@ -127,30 +157,37 @@ const HomePage = () => {
       <View>
           <ScrollView>
             <Text style={styles.TILabel}>Enter name:</Text>
-            <TextInput 
-            style={styles.input}
+            <TextInput  onChange={handleChange}
+            value = {input.Name}
+            style={styles.input1}
             placeholder='ex. Juan Dela Cruz'
-            onChangeText={(val) => setName(val)}/><Text style={styles.uState}>name: {Name}</Text>
+       
+            />
           
              <Text style={styles.TILabel}>Enter age:</Text>
-                <TextInput 
-                  style={styles.input}
+                <TextInput onChange={handleChange}
+                
+                  style={styles.input2}
                   placeholder='ex. 40'
-                  onChangeText={(val) => setAge(val)}/><Text style={styles.uState}>age: {Age}</Text>
+                  
+                  />
 
                     <Text style={styles.TILabel}>Enter address:</Text>
-                       <TextInput 
-                        style={styles.input}
+                       <TextInput onChange={handleChange}
+                       
+                        style={styles.input3}
                         placeholder='ex. Blk1 Lot999'
-                        onChangeText={(val) => setAddress(val)}/><Text style={styles.uState}>address: {Address}</Text>
+                        
+                        />
 
                           <Text style={styles.TILabel}>Enter contact #:</Text>
-                            <TextInput 
-                              style={styles.input}
+                            <TextInput onChange={handleChange}
+                              style={styles.input4}
                               placeholder='ex. 09123456789'
-                              onChangeText={(val) => setContact(val)}/><Text style={styles.uState}>contact: {Contact}</Text>
+                         
+                              />
 
-                <Button title="Send Request" color = '#7574cf'/>
+                <Button title="Send Request" color = '#7574cf' onPress={handleClick}/>
            
                 <Text>{'\n'}{'\n'}{'\n'}</Text>
                 <Text style={styles.textREQ}>NOTE: THIS PAGE IS FOR REQUESTING RESCUERS ONLY!</Text>
@@ -318,7 +355,28 @@ Imppara:{
 
   },
   
-  input: {
+  input1: {
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 7,
+    margin: 10,
+    width: 300,
+  },
+  input2: {
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 7,
+    margin: 10,
+    width: 300,
+  },
+  input3: {
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 7,
+    margin: 10,
+    width: 300,
+  },
+  input4: {
     borderWidth: 1,
     borderColor: 'black',
     padding: 7,
