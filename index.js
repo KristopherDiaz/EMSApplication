@@ -10,6 +10,6 @@ mongoose.connect("mongodb+srv://kris:emsapp1234@cluster0.pbl7rn8.mongodb.net/EMS
 
 app.use("/", require("./routes/reqRoutes"));
 
-app.listen(5000, function(){
+app.listen(3001, function(){
     console.log("express server is running on port 5000")
 })

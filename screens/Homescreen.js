@@ -9,11 +9,15 @@ import { View,
   Button, 
   ScrollView, 
   SafeAreaView, 
-  Linking} from 'react-native';
+  Linking,
+  Alert
+} from 'react-native';
 import { StatusBar } from 'react-native';
 
+
+
 // image with GPS
-const HomePage = () => {
+const HomePage = ({navigation}) => {
 
   const handleImageClick = () => {
   const url = 'https://goo.gl/maps/wLokbxuYFiDeHbsz7';
@@ -62,7 +66,6 @@ const HomePage = () => {
 
   }
 
-
   function handleClick(event){
     event.preventDefault();
     const newRequest = {
@@ -72,9 +75,10 @@ const HomePage = () => {
         Contact: input.Contact
       
     }
-    axios.post('http://192.168.1.3:5000/create', newRequest)
+    axios.post('http://172.20.10.2:3001/create', newRequest)
   }
-    
+
+
   return (
     // initializng function for changing tabs
       <View 
@@ -119,34 +123,36 @@ const HomePage = () => {
                       <Image style={styles.image}
                       source={require('../assets/3.jpg')}>
                       </Image></TouchableOpacity>
+                      <Button title="Details" color = '#7574cf' style={{borderRadius: 10,}} onPress={() => navigation.navigate('RODRIGUEZ EC', {name: 'RECdetails'})} />
                      
 
                       <Text style={styles.imagesLabel}>{'\n'}KASIGLAHAN VILLAGE NATIONAL HIGH SCHOOL</Text>
                       <TouchableOpacity onPress={handleImageClick2}>
                       <Image style={styles.image2}
                         source={require('../assets/4.jpg')}>
-                      </Image></TouchableOpacity>
+                      </Image></TouchableOpacity><Button title="Details" color = '#7574cf' onPress={() => navigation.navigate('KVNHS', {name: 'KVNHSdetails'})} />
+                      
                       
                       <Text style={styles.imagesLabel}>{'\n'}KASIGLAHAN SENIOR HIGH SCHOOL</Text>
                       <TouchableOpacity onPress={handleImageClick3}>
                       <Image style={styles.image3}
                         source={require('../assets/5.png')}>
                       </Image> 
-                      </TouchableOpacity>
+                      </TouchableOpacity><Button title="Details" color = '#7574cf' onPress={() => navigation.navigate('KVSHS', {name: 'KVSHSdetails'})} />
 
                       <Text style={styles.imagesLabel}>{'\n'}BURGOS ELEMENTARY SCHOOL</Text>
                       <TouchableOpacity onPress={handleImageClick4}>
                       <Image style={styles.image4}
                         source={require('../assets/6.png')}>
                       </Image> 
-                      </TouchableOpacity>
+                      </TouchableOpacity><Button title="Details" color = '#7574cf' onPress={() => navigation.navigate('BES', {name: 'BESdetails'})} />
 
                       <Text style={styles.imagesLabel}>{'\n'}SAN JOSE ELEMENTARY SCHOOL</Text>
                       <TouchableOpacity onPress={handleImageClick5}>
                       <Image style={styles.image5}
                         source={require('../assets/7.png')}>
                       </Image> 
-                      </TouchableOpacity>
+                      </TouchableOpacity><Button title="Details" color = '#7574cf' onPress={() => navigation.navigate('SJES', {name: 'SJESdetails'})} />
 
                     </View>
 
@@ -187,7 +193,7 @@ const HomePage = () => {
                          
                               />
 
-                <Button title="Send Request" color = '#7574cf' onPress={handleClick}/>
+                <Button title="Send Request" color = '#7574cf' onPress={handleClick} />
            
                 <Text>{'\n'}{'\n'}{'\n'}</Text>
                 <Text style={styles.textREQ}>NOTE: THIS PAGE IS FOR REQUESTING RESCUERS ONLY!</Text>
@@ -300,7 +306,7 @@ Imppara:{
     height: 210,
     width: 300,
     marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 10,
     borderRadius: 20,
     alignItems: 'center',
   },
@@ -309,7 +315,7 @@ Imppara:{
     height: 210,
     width: 300,
     marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 10,
     borderRadius: 20,
     alignItems: 'center',
   },
@@ -318,7 +324,7 @@ Imppara:{
     height: 210,
     width: 300,
     marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 10,
     borderRadius: 20,
     alignItems: 'center',
   },
@@ -327,7 +333,7 @@ Imppara:{
     height: 210,
     width: 300,
     marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 10,
     borderRadius: 20,
     alignItems: 'center',
   },
@@ -335,13 +341,11 @@ Imppara:{
     height: 210,
     width: 300,
     marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 10,
     borderRadius: 20,
     alignItems: 'center',
   },
-  
-  
-  
+
   imagesLabel:{
     fontSize: 14,
     fontWeight: 'bold',
@@ -390,6 +394,7 @@ Imppara:{
 uState: {
     textAlign: 'left',
 },
+
 });
 
 export default HomePage;
