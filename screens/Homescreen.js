@@ -40,42 +40,39 @@ const HomePage = ({navigation}) => {
                     Linking.openURL(url).catch((error) => console.error('Error opening URL: ', error));
                     };
 
+   const createTwoButtonAlert = () =>
+      Alert.alert('Request', 'Sent!');
+      
   const [activeTab, setActiveTab] = useState('Tab1');
 
+  
 
   const handleTabPress = (tab) => {
     setActiveTab(tab);
   }; 
   
       const [input, setInput] = useState({
-        Name: '', 
-        Age: '',
+
         Address: '',
         Contact: ''
       })
-
   
-  function handleChange(event){
-    const {name, value } = event.target;
-    setInput(prevInput => {
-      return{
-        ...prevInput,
-        [name]: value
+      function handleChange(name, value) {
+        // Check if the value is not empty before updating the state
+        if (value.trim() !== '') {
+          setInput(prevInput => ({
+            ...prevInput,
+            [name]: value
+          }));
+        }
       }
-    })
 
-  }
-
-  function handleClick(event){
-    event.preventDefault();
+  function handleClick(){
     const newRequest = {
-        Name: input.Name,
-        Age: input.Age,
         Address: input.Address,
         Contact: input.Contact
-      
     }
-    axios.post('http://172.20.10.2:3001/create', newRequest)
+    axios.post('http://192.168.1.6:3001/create', newRequest)
   }
 
 
@@ -91,19 +88,29 @@ const HomePage = ({navigation}) => {
             style={[styles.tab, activeTab === 'Tab1' && styles.activeTab]}
             onPress={() => handleTabPress('Tab1')}
           >
-            <Text style={styles.tabText}>FEATURES</Text>
+          <Image style={styles.homeIMG}
+              source={require('../assets/HOMEICON1.png')}>
+          </Image>
+            <Text style={styles.tabText}>{'\n'}HOME</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
             style={[styles.tab, activeTab === 'Tab2' && styles.activeTab]}
             onPress={() => handleTabPress('Tab2')}
           >
-            <Text style={styles.tabText}>REQUEST RESCUERS</Text>
+            <Image style={styles.reqIMG}
+            source={require('../assets/medical-service.png')}>
+          </Image>
+            <Text style={styles.tabText}>REQUEST RESCUES</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.tab, activeTab === 'Tab3' && styles.activeTab]}
             onPress={() => handleTabPress('Tab3')}
           >
-            <Text style={styles.tabText}>ABOUT</Text>
+          <Image style={styles.regIMG}
+            source={require('../assets/add-post.png')}>
+          </Image>
+            <Text style={styles.tabText}>{'\n'}REGISTRATION</Text>
           </TouchableOpacity>
           <StatusBar style="auto"/>
 
@@ -114,8 +121,9 @@ const HomePage = ({navigation}) => {
       {/* Calling the function for changing tabs */}
 
       <View style={styles.tabContent}>
-          
+        
         {activeTab === 'Tab1' && (
+          // HOMEPAGE && EVACAUATION DETAILS
               <ScrollView>
                     <View> 
                       <Text style={styles.imagesLabel}>RODRIGUEZ EVACUATION CENTER</Text>
@@ -160,72 +168,39 @@ const HomePage = ({navigation}) => {
         )}
         
         {activeTab === 'Tab2' && (
+          // FOR REQUESTING TAB
       <View>
-          <ScrollView>
-            <Text style={styles.TILabel}>Enter name:</Text>
-            <TextInput  onChange={handleChange}
-            value = {input.Name}
-            style={styles.input1}
-            placeholder='ex. Juan Dela Cruz'
-       
-            />
-          
-             <Text style={styles.TILabel}>Enter age:</Text>
-                <TextInput onChange={handleChange}
+      <Text style={styles.TILabel}>Enter address:</Text>
+      <TextInput
+        value={input.Address}
+        onChangeText={(text) => handleChange('Address', text)}
+        style={styles.input3}
+      />
+
+      <Text style={styles.TILabel}>Enter Contact:</Text>
+      <TextInput
+        value={input.Contact}
+        onChangeText={(text) => handleChange('Contact', text)}
+        style={styles.input3}
+      />
+
+                <Button title="Send Request" color = '#7574cf' onPress={() => {handleClick(); createTwoButtonAlert();}}/>
                 
-                  style={styles.input2}
-                  placeholder='ex. 40'
-                  
-                  />
-
-                    <Text style={styles.TILabel}>Enter address:</Text>
-                       <TextInput onChange={handleChange}
-                       
-                        style={styles.input3}
-                        placeholder='ex. Blk1 Lot999'
-                        
-                        />
-
-                          <Text style={styles.TILabel}>Enter contact #:</Text>
-                            <TextInput onChange={handleChange}
-                              style={styles.input4}
-                              placeholder='ex. 09123456789'
-                         
-                              />
-
-                <Button title="Send Request" color = '#7574cf' onPress={handleClick} />
            
                 <Text>{'\n'}{'\n'}{'\n'}</Text>
                 <Text style={styles.textREQ}>NOTE: THIS PAGE IS FOR REQUESTING RESCUERS ONLY!</Text>
-                    
-          </ScrollView>
       </View>
-          
-        )}
+)}
+
         {activeTab === 'Tab3' && (
-          <View><ScrollView>
-            <Text style={styles.MISSION}>MISSION</Text>
-            <Text style={styles.Mpara}>
-              Our mission is to ensure the safety and well-being of individuals, communities, and organizations through effective evacuation management. We are dedicated to providing comprehensive solutions and services that prioritize emergency preparedness, minimize risks, and facilitate efficient and secure evacuations during critical situations."
-              Purpose{'\n'}
-              </Text>
+          // FOR NUMBER REGISTRATION TAB
+          <View>
+            <Text style={styles.etn}>Please provide your number</Text>
+            <TextInput onChange={handleChange}
+              style={styles.regInput}
+              placeholder='Pease enter your number'/>
 
-              <Text style={styles.PURPOSE}>PURPOSE</Text>
-            <Text style={styles.Ppara}>
-            we recognize the vital importance of emergency preparedness and the critical role it plays in saving lives and minimizing the impact of disasters. Our purpose is to empower individuals, businesses, and communities with the knowledge, tools, 
-            and resources necessary to respond swiftly and effectively when faced with the need to evacuate."{'\n'}
-              </Text>
-
-              <Text style={styles.Imp}>IMPORTANCE OF EMERGENCY PREPAREDNESS</Text>
-            <Text style={styles.Imppara}>
-            Emergency preparedness is paramount as it enables proactive measures to mitigate risks and ensures a timely and organized response during crises. By investing in preparedness, individuals and organizations can minimize the potential loss of life, injuries, property damage, and disruption caused by emergencies."{'\n'}
-            {'\n'}{'\n'}{'\n'}{'\n'}{'\n'}{'\n'}{'\n'}{'\n'}</Text>
-
-            <Text>CONTACT US:{'\n'}</Text>
-            <Text>Contact#: 09187883325</Text>
-            <Text>Email: evacuation.managementSystem@gmail.com</Text>
-            <Text>Facebook: EMS!</Text>
-            </ScrollView>
+            <Button title='Register' color = '#7574cf'/>
           </View>
         )}
       </View>
@@ -235,41 +210,37 @@ const HomePage = ({navigation}) => {
   );
 };
 
+
+//Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#cccee3',
+    
     position: 'relative',
-
   },
-  MISSION: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    textAlign: 'center',
+  regIMG: {
+    width: 35,
+    height: 35
   },
-  Mpara: {
-    textAlign: 'center',
-    fontStyle: 'italic'
+  reqIMG:{
+    width: 40,
+    height: 45
   },
-  PURPOSE: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    textAlign: 'center',
+  homeIMG:{
+    width: 30,
+    height: 30
   },
-Ppara:{
-  textAlign: 'center',
-  fontStyle: 'italic'
-},
-
-Imp:{
-  fontSize: 25,
-  fontWeight: 'bold',
-  textAlign: 'center',
-},
-Imppara:{
-  textAlign: 'center',
-  fontStyle: 'italic'
-},
+  etn:{
+    fontSize: 18,
+  },
+  regInput: {
+    borderWidth: 2,
+    borderColor: 'black',
+    padding: 10,
+    margin: 10,
+    alignItems: 'center',
+    width: 300,
+  },
   tabDrawer: {
     flexDirection: 'row',
     borderBottomWidth: 1,
@@ -283,18 +254,15 @@ Imppara:{
   },
   activeTab: {
     borderBottomColor: 'blue',
-    borderBottomWidth: 2,
-
+    borderBottomWidth: 3,
   },
   tabText: {
-    fontSize: 16,
+    fontSize: 10,
     fontWeight: 'bold',
-    
   },
   tabContent: {
     flex: 1,
     padding: 50,
-
   },
 
   textEVAC: {
@@ -359,20 +327,6 @@ Imppara:{
 
   },
   
-  input1: {
-    borderWidth: 1,
-    borderColor: 'black',
-    padding: 7,
-    margin: 10,
-    width: 300,
-  },
-  input2: {
-    borderWidth: 1,
-    borderColor: 'black',
-    padding: 7,
-    margin: 10,
-    width: 300,
-  },
   input3: {
     borderWidth: 1,
     borderColor: 'black',

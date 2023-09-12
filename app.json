@@ -4,7 +4,7 @@
     "slug": "EMSApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/iconEMS.png",
+    "icon": "./assets/EMSlogo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/EMSlogo.png",
