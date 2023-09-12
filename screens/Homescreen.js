@@ -13,6 +13,7 @@ import { View,
   Alert
 } from 'react-native';
 import { StatusBar } from 'react-native';
+import { ImageBackground } from 'react-native-web';
 
 
 
@@ -78,25 +79,39 @@ const HomePage = ({navigation}) => {
 
   return (
     // initializng function for changing tabs
+    
       <View 
         style={styles.container}>
         
 <SafeAreaView>
+
         <View style={styles.tabDrawer}>
-        
-          <TouchableOpacity
+          
+          
+        <TouchableOpacity
             style={[styles.tab, activeTab === 'Tab1' && styles.activeTab]}
             onPress={() => handleTabPress('Tab1')}
           >
           <Image style={styles.homeIMG}
               source={require('../assets/HOMEICON1.png')}>
           </Image>
-            <Text style={styles.tabText}>{'\n'}HOME</Text>
+            <Text style={styles.tabText}>HOME</Text>
           </TouchableOpacity>
+
 
           <TouchableOpacity
             style={[styles.tab, activeTab === 'Tab2' && styles.activeTab]}
             onPress={() => handleTabPress('Tab2')}
+          >
+          <Image style={styles.listIMG}
+              source={require('../assets/list.png')}>
+          </Image>
+            <Text style={styles.tabText}>EVACUATION LIST</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.tab, activeTab === 'Tab3' && styles.activeTab]}
+            onPress={() => handleTabPress('Tab3')}
           >
             <Image style={styles.reqIMG}
             source={require('../assets/medical-service.png')}>
@@ -104,13 +119,13 @@ const HomePage = ({navigation}) => {
             <Text style={styles.tabText}>REQUEST RESCUES</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.tab, activeTab === 'Tab3' && styles.activeTab]}
-            onPress={() => handleTabPress('Tab3')}
+            style={[styles.tab, activeTab === 'Tab4' && styles.activeTab]}
+            onPress={() => handleTabPress('Tab4')}
           >
           <Image style={styles.regIMG}
             source={require('../assets/add-post.png')}>
           </Image>
-            <Text style={styles.tabText}>{'\n'}REGISTRATION</Text>
+            <Text style={styles.tabText}>REGISTRATION</Text>
           </TouchableOpacity>
           <StatusBar style="auto"/>
 
@@ -121,9 +136,54 @@ const HomePage = ({navigation}) => {
       {/* Calling the function for changing tabs */}
 
       <View style={styles.tabContent}>
+
+      {activeTab === 'Tab1' && (
+          // HOMEPAGE && EVACUATION DETAILS
+          
+              <ScrollView>
+              
+      <View>
+          <Text style={styles.emsTITLE}>Evacuation Management System </Text>  
+          <Text style={styles.emsParagraph}>"In times of crisis, evacuation is our best defense. Stay calm, follow instructions, and evacuate to safety."{'\n'}</Text>
+          <Image style={styles.image}source={require('../assets/fire-evacuation-plan.jpg')}></Image>
+          <Text style={styles.imgReferences}>Photo Reference: https://www.cityfire.co.uk/news/how-to-create-a-fire-evacuation-plan/</Text>
+          
+          
+          <Text style={styles.emsABOUT}>{'\n'}{'\n'}{'\n'}About Evacuation Management</Text>
+          <Text style={styles.emssource}>Your Source for Crisis Preparedness</Text>
+          <Text style={styles.service}>{'\n'}At Evacuation Management, we understand that in times of crisis, evacuation is our best defense. That's why we provide expert guidance and support to help you and your organization stay safe. Our team of experienced professionals is committed to ensuring that you are prepared for any emergency. 
+          We offer a range of services including risk assessments, emergency planning, 
+          and crisis management training. Let us help you protect what matters most{'\n'}</Text>
+          <Image style={styles.image}source={require('../assets/194866.jpg')}></Image>       
+          <Text style={styles.imgReferences}>Photo Reference: https://www.nippon.com/en/in-depth/d00544/</Text>
+      
+          <Text style={styles.emssource}>{'\n'}{'\n'}Our Services</Text>
+          <Text style={styles.service}>At Evacuation Management, we offer a range of services to help you 
+          and your organization prepare for any emergency. Here are some of the services we provide</Text>
+          <Text style={styles.emsParagraph1}>{'\n'}Risk Assessments</Text>
+          <Text style={styles.service}>{'\n'}  Our team of experts will assess your organization's vulnerabilities and provide recommendations to mitigate risk.</Text>
+          <Image style={styles.image}source={require('../assets/builiding-evacuations.jpg')}></Image>       
+          <Text style={styles.imgReferences}>Photo Reference: https://www.reminetwork.com/articles/safe-protocols-high-rise-building-evacuations/</Text>
         
-        {activeTab === 'Tab1' && (
-          // HOMEPAGE && EVACAUATION DETAILS
+          
+          <Text style={styles.emsParagraph1}>{'\n'}Emergency Planning</Text>
+          <Text style={styles.service}>{'\n'}  We will work with you to create a comprehensive emergency plan 
+          tailored to your organization's needs.</Text>
+          <Image style={styles.image}source={require('../assets/ep.jpg')}></Image>       
+          <Text style={styles.imgReferences}>Photo Reference: https://www.ishn.com/articles/112738-workplace-preparedness-planning-for-the-unexpected</Text>
+          
+          <Text style={styles.contact}>{'\n'}{'\n'}Contact us:{'\n'}09705818869</Text>
+          <Text style={styles.contact}>{'\n'}Located at:{'\n'}Rodriguez Rizal</Text>
+      
+      </View>
+
+              </ScrollView>
+        )}
+
+
+
+        {activeTab === 'Tab2' && (
+          // HOMEPAGE && EVACUATION DETAILS
               <ScrollView>
                     <View> 
                       <Text style={styles.imagesLabel}>RODRIGUEZ EVACUATION CENTER</Text>
@@ -131,14 +191,14 @@ const HomePage = ({navigation}) => {
                       <Image style={styles.image}
                       source={require('../assets/3.jpg')}>
                       </Image></TouchableOpacity>
-                      <Button title="Details" color = '#7574cf' style={{borderRadius: 10,}} onPress={() => navigation.navigate('RODRIGUEZ EC', {name: 'RECdetails'})} />
+                      <Button title="Details" color = 'blue' style={{borderRadius: 10,}} onPress={() => navigation.navigate('RODRIGUEZ EC', {name: 'RECdetails'})} />
                      
 
                       <Text style={styles.imagesLabel}>{'\n'}KASIGLAHAN VILLAGE NATIONAL HIGH SCHOOL</Text>
                       <TouchableOpacity onPress={handleImageClick2}>
                       <Image style={styles.image2}
                         source={require('../assets/4.jpg')}>
-                      </Image></TouchableOpacity><Button title="Details" color = '#7574cf' onPress={() => navigation.navigate('KVNHS', {name: 'KVNHSdetails'})} />
+                      </Image></TouchableOpacity><Button title="Details" color = 'blue' onPress={() => navigation.navigate('KVNHS', {name: 'KVNHSdetails'})} />
                       
                       
                       <Text style={styles.imagesLabel}>{'\n'}KASIGLAHAN SENIOR HIGH SCHOOL</Text>
@@ -146,28 +206,28 @@ const HomePage = ({navigation}) => {
                       <Image style={styles.image3}
                         source={require('../assets/5.png')}>
                       </Image> 
-                      </TouchableOpacity><Button title="Details" color = '#7574cf' onPress={() => navigation.navigate('KVSHS', {name: 'KVSHSdetails'})} />
+                      </TouchableOpacity><Button title="Details" color = 'blue' onPress={() => navigation.navigate('KVSHS', {name: 'KVSHSdetails'})} />
 
                       <Text style={styles.imagesLabel}>{'\n'}BURGOS ELEMENTARY SCHOOL</Text>
                       <TouchableOpacity onPress={handleImageClick4}>
                       <Image style={styles.image4}
                         source={require('../assets/6.png')}>
                       </Image> 
-                      </TouchableOpacity><Button title="Details" color = '#7574cf' onPress={() => navigation.navigate('BES', {name: 'BESdetails'})} />
+                      </TouchableOpacity><Button title="Details" color = 'blue' onPress={() => navigation.navigate('BES', {name: 'BESdetails'})} />
 
                       <Text style={styles.imagesLabel}>{'\n'}SAN JOSE ELEMENTARY SCHOOL</Text>
                       <TouchableOpacity onPress={handleImageClick5}>
                       <Image style={styles.image5}
                         source={require('../assets/7.png')}>
                       </Image> 
-                      </TouchableOpacity><Button title="Details" color = '#7574cf' onPress={() => navigation.navigate('SJES', {name: 'SJESdetails'})} />
+                      </TouchableOpacity><Button title="Details" color = 'blue' onPress={() => navigation.navigate('SJES', {name: 'SJESdetails'})} />
 
                     </View>
 
               </ScrollView>
         )}
         
-        {activeTab === 'Tab2' && (
+        {activeTab === 'Tab3' && (
           // FOR REQUESTING TAB
       <View>
       <Text style={styles.TILabel}>Enter address:</Text>
@@ -184,7 +244,7 @@ const HomePage = ({navigation}) => {
         style={styles.input3}
       />
 
-                <Button title="Send Request" color = '#7574cf' onPress={() => {handleClick(); createTwoButtonAlert();}}/>
+                <Button title="Send Request" color = 'blue' onPress={() => {handleClick(); createTwoButtonAlert();}}/>
                 
            
                 <Text>{'\n'}{'\n'}{'\n'}</Text>
@@ -192,15 +252,15 @@ const HomePage = ({navigation}) => {
       </View>
 )}
 
-        {activeTab === 'Tab3' && (
+        {activeTab === 'Tab4' && (
           // FOR NUMBER REGISTRATION TAB
           <View>
             <Text style={styles.etn}>Please provide your number</Text>
-            <TextInput onChange={handleChange}
+            <TextInput 
               style={styles.regInput}
               placeholder='Pease enter your number'/>
 
-            <Button title='Register' color = '#7574cf'/>
+            <Button title='Register' color = 'blue'/>
           </View>
         )}
       </View>
@@ -215,16 +275,53 @@ const HomePage = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
     position: 'relative',
+    backgroundColor: '#deecff'
+  },
+  emsABOUT:{
+    fontSize: 15,
+    textAlign: 'center'
+  },
+  emsTITLE: {
+    fontSize: 50,
+    marginBottom: 10,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  service:{
+    fontSize: 15,
+    textAlign: 'justify'
+  },
+  emsParagraph: {
+    fontSize: 18,
+    textAlign: 'justify',
+    fontStyle: 'italic',
+  },
+  emssource:{
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  emsParagraph1:{
+    fontSize: 17,
+    textAlign: 'justify',
+    fontStyle: 'italic',
+    fontWeight: 'bold'
+  },
+  imgReferences:{
+    fontSize: 10,
+    fontStyle: 'italic'
+  },
+  listIMG:{
+    width: 30,
+    height: 30
   },
   regIMG: {
-    width: 35,
-    height: 35
+    width: 30,
+    height: 30
   },
   reqIMG:{
-    width: 40,
-    height: 45
+    width: 43,
+    height: 30
   },
   homeIMG:{
     width: 30,
@@ -328,7 +425,7 @@ const styles = StyleSheet.create({
   },
   
   input3: {
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: 'black',
     padding: 7,
     margin: 10,
