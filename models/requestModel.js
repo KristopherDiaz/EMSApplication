@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const RequestSchema = {
-
     Address: String,
     Contact: String
 }

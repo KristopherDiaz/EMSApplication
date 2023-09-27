@@ -6,9 +6,11 @@ const mongoose = require("mongoose");
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb+srv://kris:emsapp1234@cluster0.pbl7rn8.mongodb.net/EMSDB")
+mongoose.connect("mongodb+srv://kris:12345@cluster0.pbl7rn8.mongodb.net/EMSDB")
 
 app.use("/", require("./routes/reqRoutes"));
+app.use("/", require("./routes/regRoutes"));
+
 
 app.listen(3001, function(){
     console.log("express server is running on port 3001")

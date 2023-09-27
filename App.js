@@ -35,10 +35,6 @@ const App = () => {
     </NavigationContainer>
 
   );
-  <HomePage/>
-
 
 };
-
-
 export default App;
