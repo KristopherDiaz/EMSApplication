@@ -5,6 +5,6 @@ const RegisterSchema = {
 
 }
 
-const Register = mongoose.model("Register", RegisterSchema);
+const Register = mongoose.model("Registers", RegisterSchema);
 
 module.exports = Register;

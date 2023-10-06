@@ -10,7 +10,8 @@ import { View,
   ScrollView, 
   SafeAreaView, 
   Linking,
-  Alert
+  Alert,
+  ImageBackground
 } from 'react-native';
 import { StatusBar } from 'react-native';
 
@@ -44,8 +45,7 @@ const HomePage = ({navigation}) => {
    const createTwoButtonAlert = () =>
       Alert.alert('Request', 'Sent!');
 
-  const createTwoButtonAlert1 = () =>
-      Alert.alert('Registration', 'DONE');
+    
 
   const [activeTab, setActiveTab] = useState('Tab1');
 
@@ -56,6 +56,8 @@ const HomePage = ({navigation}) => {
       const [input, setInput] = useState({
         Address: '',
         Contact: '',
+      })
+      const [simInput, setSimInput] = useState({
         Registration: ''
       })
   
@@ -64,30 +66,39 @@ const HomePage = ({navigation}) => {
           ...prevInput,
           [name]: value
         }));
+      
+        setSimInput(prevInput => ({
+          ...prevInput,
+          [name]: value
+        }));
       }
       
-
+    // for request
   function handleClick(){
     const newRequest = {
         Address: input.Address,
         Contact: input.Contact
     }
-    axios.post('http://192.168.1.9:3001/create', newRequest)
+    axios.post('http://192.168.1.3:3001/create', newRequest)
   }
-
+    // for sim registration 
   function handleClick2(){
     const newRegister = {
-      Registration: input.Registration,
+      Registration: simInput.Registration,
     }
-    axios.post('http://192.168.1.9:3001/create', newRegister)
+    axios.post('http://192.168.1.3:3001/create', newRegister)
   }
+
 
   return (
     // initializng function for changing tabs
     
     <View style={styles.container}>
-     
-    
+
+      <ImageBackground source={require('../assets/bg.png')}
+      resizeMode="cover"
+       style={styles.image55}>
+
           {/* Move the tabDrawer to the bottom */}
           <View style={styles.tabContent}>
             {activeTab === 'Tab1' && (
@@ -177,9 +188,11 @@ const HomePage = ({navigation}) => {
             {activeTab === 'Tab3' && (
               // FOR REQUESTING TAB
               <View style={styles.reqtabContent}> 
+            
               <Image style={styles.reqImage}
-              source = {require('../assets/EMS.png')}></Image>
+              source = {require('../assets/bglogo.png')}></Image>
                  <View>
+                 <ScrollView>
       <Text style={styles.TILabel}>Enter address:</Text>
       <TextInput
         value={input.Address}
@@ -188,41 +201,49 @@ const HomePage = ({navigation}) => {
       />
 
       <Text style={styles.TILabel}>Enter Contact:</Text>
-      <TextInput
+      <TextInput 
         value={input.Contact}
         onChangeText={(text) => handleChange('Contact', text)}
+        keyboardType="numeric"
+        placeholder='+63'
         style={styles.input3}
+        
       />
 
          <Button title="Send Request" color = 'blue' onPress={() => {handleClick(); createTwoButtonAlert();}}/>
 
-            <Text>{'\n'}{'\n'}{'\n'}</Text>
-            <Text style={styles.textREQ}>NOTE: THIS PAGE IS FOR REQUESTING RESCUE ONLY!</Text>
+     
+
+            </ScrollView>
     </View>
+
               </View>
             )}
     
-{activeTab === 'Tab4' && (
-                              // FOR NUMBER REGISTRATION TAB
+  {activeTab === 'Tab4' && (
+          // FOR NUMBER REGISTRATION TAB
         <View>
       
           <View>
             <Text style={styles.etn}>REGISTER YOUR NUMBER!</Text>
+            <Text style={styles.phnNum}>Phone Number</Text>
             <TextInput 
-              value={input.Registration}
-              onChangeText={(text) => handleChange('Registration', text)}
-              placeholder='Enter your Number'
+              value={simInput.Registration}
+              onChangeText={(text) => {
+              handleChange('Registration', text);
+             }}
+              keyboardType="numeric"
+              placeholder="Enter a number"
               style={styles.regInput}
               />
-            <Button title='Register' color = 'blue' onPress={() => {handleClick2(); createTwoButtonAlert1();}}/>
+            <Button title='Verify' color = 'blue' onPress={() => {handleClick2(); }}/>
           
           <Text>{'\n'}{'\n'}{'\n'}{'\n'}Register your number to get early announcement of emergencies!</Text>
           </View>
-      
         </View>
 )}
           
-</View>
+ </View>
     
           {/* Calling the function for changing tabs */}
           <View style={styles.tabDrawer}>
@@ -231,7 +252,7 @@ const HomePage = ({navigation}) => {
             onPress={() => handleTabPress('Tab1')}
           >
           <Image style={styles.homeIMG}
-              source={require('../assets/HOMEICON1.png')}>
+              source={require('../assets/home-page.png')}>
           </Image>
             <Text style={styles.tabText}>HOME</Text>
           </TouchableOpacity>
@@ -265,12 +286,13 @@ const HomePage = ({navigation}) => {
           </Image>
             <Text style={styles.tabText}>REGISTRATION</Text>
           </TouchableOpacity>
-          <StatusBar style="auto"/>
+   
           </View>
-       
+          </ImageBackground>
       </View>
  
   );
+  
 };
 
 
@@ -281,11 +303,21 @@ const styles = StyleSheet.create({
     position: 'relative',
     backgroundColor: '#fff'
   },
+  image55: {
+    flex: 1,
+    justifyContent: 'center',
+    
+  },
   reqtabContent: {
     paddingVertical: 10,
     alignItems: 'center',
+    
   },
-  
+  phnNum:{
+    fontSize: 15,
+    paddingTop: 200,
+    marginLeft: 15
+  },
   reqImage:{
     width: 250,
     height: 250,
@@ -337,8 +369,8 @@ const styles = StyleSheet.create({
     height: 30
   },
   homeIMG:{
-    width: 30,
-    height: 30
+    width: 32,
+    height: 29
   },
   etn:{
     fontSize: 45,
@@ -351,14 +383,14 @@ const styles = StyleSheet.create({
     margin: 10,
     alignItems: 'center',
     width: 300,
-    marginTop: 200,
+    marginTop: 5,
     borderRadius: 50,
   },
   tabDrawer: {
     flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: 'gray',
-    paddingBottom: 5
+    borderBottomWidth: 0,
+    paddingBottom: 15,
+    backgroundColor: '#ffbd17'
   },
   tab: {
     flex: 1,
@@ -368,12 +400,15 @@ const styles = StyleSheet.create({
   },
   activeTab: {
     borderBottomColor: 'blue',
+    borderRadius: 2,
     borderBottomWidth: 3,
   },
   tabText: {
-    fontSize: 10,
-    fontWeight: 'bold',
+    fontSize: 9,
+    fontWeight: 'bold'
+
   },
+
   tabContent: {
     flex: 5,
     padding: 50,

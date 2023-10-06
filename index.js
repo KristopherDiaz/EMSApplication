@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb+srv://kris:12345@cluster0.pbl7rn8.mongodb.net/EMSDB")
+mongoose.connect("mongodb+srv://Group5:EMS4ACP2@emscluster.hjpqmif.mongodb.net/EMSDB")
 
 app.use("/", require("./routes/reqRoutes"));
 app.use("/", require("./routes/regRoutes"));
