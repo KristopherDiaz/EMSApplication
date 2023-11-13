@@ -4,7 +4,7 @@ import React from 'react';
 
 const SJESdetails = () => {
     return (
-      <View> 
+      <View style={styles.container}> 
 
         <Text style={styles.title}>RODRIGUEZ EVACUATION CENTER</Text>
 
@@ -19,6 +19,10 @@ const SJESdetails = () => {
   };
   
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ffe7d3'
+  },
   title: {
     textAlign: 'center',
     fontStyle: 'normal',

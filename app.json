@@ -15,16 +15,23 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kristopher.d.EMSApp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/iconEMS.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.kristopher.d.EMSApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2617e497-8c59-47c0-a37f-e1f614af46d9"
+      }
     }
   }
 }
