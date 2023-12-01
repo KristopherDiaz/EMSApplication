@@ -10,24 +10,25 @@ import { View,
   ScrollView, 
   Linking,
   Alert,
-  ImageBackground
+  ImageBackground,
+  Dimensions
 } from 'react-native';
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 
-
+const { width, height } = Dimensions.get('window');
 
 const HomePage = ({navigation}) => {
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      title: '', 
-      headerShown: false, 
+      title: '',
+      headerShown: false,
     });
   }, [navigation]);
 
     // para sa malupit na image with GPS
   const handleImageClick = () => {
-
     const url = 'https://goo.gl/maps/wLokbxuYFiDeHbsz7';
       Linking.openURL(url).catch((error) => console.error('Error opening URL: ', error));
       };
@@ -75,7 +76,7 @@ const HomePage = ({navigation}) => {
         Address: input.Address,
         Contact: input.Contact
     }
-    axios.post('http://192.168.1.9:3001/create', newRequest)
+    axios.post('http://192.168.1.6:3001/create', newRequest)
   }
 
 
@@ -83,9 +84,11 @@ const HomePage = ({navigation}) => {
     // for changing tabs
     <View style={styles.container}>
 
-      <ImageBackground source={require('../assets/bg.png')}
-        resizeMode= 'cover'
-       style={styles.image55}>
+      <ImageBackground
+        source={require('../assets/bg.png')}
+        resizeMode="cover"
+        style={[styles.imageBackground, { width, height }]} // Use screen dimensions 
+        >
 
          
           <View style={styles.tabContent}>
@@ -139,40 +142,32 @@ const HomePage = ({navigation}) => {
                 <View> 
                       <Text style={styles.imagesLabel}>RODRIGUEZ EVACUATION CENTER</Text>
                       <TouchableOpacity onPress={handleImageClick}>
-                      <Image style={styles.image0}
-                      source={require('../assets/3.jpg')}>
-                      </Image></TouchableOpacity>
-                      <Button title="Details" color = 'blue' style={{borderRadius: 10,}} onPress={() => navigation.navigate('RODRIGUEZ EC', {name: 'RECdetails'})} />
+                      <Image
+                        style={{
+                          height: hp('20%'), 
+                          width: wp('80%'),
+                          marginTop: 10,
+                          marginBottom: 10,
+                          alignItems: 'center',
+                        }}
+                        source={require('../assets/3.jpg')}
+                      /></TouchableOpacity>
+                      <Text style={styles.styleDetails} onPress={() => navigation.navigate('RODRIGUEZ EC', {name: 'RECdetails'})}>Details</Text>
                      
-
-                      <Text style={styles.imagesLabel}>{'\n'}KASIGLAHAN VILLAGE NATIONAL HIGH SCHOOL</Text>
-                      <TouchableOpacity onPress={handleImageClick2}>
-                      <Image style={styles.image2}
-                        source={require('../assets/4.jpg')}>
-                      </Image></TouchableOpacity><Button title="Details" color = 'blue' onPress={() => navigation.navigate('KVNHS', {name: 'KVNHSdetails'})} />
+                      <Text style={styles.imagesLabel2}>MUNICIPAL GYMNASIUM</Text>
+                      <TouchableOpacity onPress={handleImageClick}>
+                      <Image
+                        style={{
+                          height: hp('20%'), 
+                          width: wp('80%'), 
+                          marginTop: 10,
+                          marginBottom: 10,
+                          alignItems: 'center',
+                        }}
+                        source={require('../assets/gymna.png')}
+                      /></TouchableOpacity>
+                      <Text style={styles.styleDetails} onPress={() => navigation.navigate('MGYM', {name: 'MGYMDETAILS'})}>Details</Text>
                       
-                      
-                      <Text style={styles.imagesLabel}>{'\n'}KASIGLAHAN SENIOR HIGH SCHOOL</Text>
-                      <TouchableOpacity onPress={handleImageClick3}>
-                      <Image style={styles.image3}
-                        source={require('../assets/5.png')}>
-                      </Image> 
-                      </TouchableOpacity><Button title="Details" color = 'blue' onPress={() => navigation.navigate('KVSHS', {name: 'KVSHSdetails'})} />
-
-                      <Text style={styles.imagesLabel}>{'\n'}BURGOS ELEMENTARY SCHOOL</Text>
-                      <TouchableOpacity onPress={handleImageClick4}>
-                      <Image style={styles.image4}
-                        source={require('../assets/6.png')}>
-                      </Image> 
-                      </TouchableOpacity><Button title="Details" color = 'blue' onPress={() => navigation.navigate('BES', {name: 'BESdetails'})} />
-
-                      <Text style={styles.imagesLabel}>{'\n'}SAN JOSE ELEMENTARY SCHOOL</Text>
-                      <TouchableOpacity onPress={handleImageClick5}>
-                      <Image style={styles.image5}
-                        source={require('../assets/7.png')}>
-                      </Image> 
-                      </TouchableOpacity><Button title="Details" color = 'blue' onPress={() => navigation.navigate('SJES', {name: 'SJESdetails'})} />
-
                     </View>
               </ScrollView>
             )}
@@ -196,7 +191,7 @@ const HomePage = ({navigation}) => {
                               keyboardType="numeric"
                               placeholder='+63'
                               style={styles.input3} />
-                            <Button title="Send Request" color = 'blue' onPress={() => {handleClick(); createTwoButtonAlert();}}/>
+                            <Text style={styles.textSendReq} onPress={() => {handleClick(); createTwoButtonAlert();}}>Send Request</Text>
                      </View>
             </View>
             )}
@@ -255,6 +250,11 @@ const styles = StyleSheet.create({
     position: 'relative',
     backgroundColor: '#fff',
   },
+
+  imageBackground: {
+    justifyContent: 'center',
+  },
+
   evaclistTitle: {
     fontSize: 30,
     fontVariant: 'small-caps common-ligatures',
@@ -274,20 +274,34 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   reqImage: {
-    width: 300,
-    height: 300,
-    marginBottom: 50,
+    height: hp('20%'), // Adjust the percentage as needed
+    width: wp('80%'), // Adjust the percentage as needed
+    marginTop: "20%",
+    marginBottom: "50%",
+    alignItems: 'center',
+  },
+  textSendReq:{
+    textAlign: 'center',
+    fontSize: 18,
+    marginTop: 10,
+    color: '#002D62'
+  },
+  styleDetails:{
+    textAlign: 'center',
+    fontSize: 18,
+    marginTop: 10,
+    color: '#002D62'
   },
   emsABOUT: {
     fontSize: 15,
     textAlign: 'center',
   },
   emsTITLE: {
-    fontSize: 50,
-    marginBottom: 10,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontSize: 30,
     fontVariant: 'small-caps common-ligatures',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    paddingBottom: "20%"
   },
   service: {
     fontSize: 15,
@@ -342,7 +356,7 @@ const styles = StyleSheet.create({
   tabDrawer: {
     flexDirection: 'row',
     borderBottomWidth: 0,
-    paddingBottom: 15,
+    paddingBottom: 20 ,
     backgroundColor: 'rgba(52, 52, 52, alpha)',
   },
   tab: {
@@ -369,57 +383,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   }, 
    image: {
-    height: 210,
-    width: 300,
-    marginTop: 10,
+    height: hp('25%'), // Adjust the percentage as needed
+    width: wp('80%'), // Adjust the percentage as needed
     marginBottom: 10,
-    borderRadius: 20,
-    marginLeft: 10,
-    alignItems: 'center',
-  },
-  image0: {
-    height: 210,
-    width: 300,
-    marginTop: 10,
-    marginBottom: 10,
-    borderRadius: 20,
-    marginLeft: 10,
-    alignItems: 'center',
-  },
-  image2: {
-    height: 210,
-    width: 300,
-    marginTop: 10,
-    marginBottom: 10,
-    borderRadius: 20,
-    marginLeft: 10,
-    alignItems: 'center',
-  },
-  image3: {
-    height: 210,
-    width: 300,
-    marginTop: 10,
-    marginBottom: 10,
-    borderRadius: 20,
-    marginLeft: 10,
-    alignItems: 'center',
-  },
-  image4: {
-    height: 210,
-    width: 300,
-    marginTop: 10,
-    marginBottom: 10,
-    borderRadius: 20,
-    marginLeft: 10,
-    alignItems: 'center',
-  },
-  image5: {
-    height: 210,
-    width: 300,
-    marginTop: 10,
-    marginBottom: 10,
-    borderRadius: 20,
-    marginLeft: 10,
     alignItems: 'center',
   },
   imagesLabel: {
@@ -427,6 +393,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     fontStyle: 'italic',
+  },
+  imagesLabel2:{
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontStyle: 'italic',
+    paddingTop: 20
   },
   TILabel: {
     fontWeight: 'bold',

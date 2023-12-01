@@ -20,7 +20,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/iconEMS.png",
+        "foregroundImage": "./assets/EMSlogo.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.kristopher.d.EMSApp"
