@@ -7,6 +7,8 @@ import KVSHSdetails from './screens/KVSHS';
 import BESdetails from './screens/BES';
 import SJESdetails from './screens/SJES';
 import MGYMDETAILS from './screens/MGYM';
+import Bdrmmodetails from './screens/BDRMMO';
+import Bannexdetails from './screens/BANNEX';
 
 //navigation
 
@@ -31,6 +33,8 @@ const App = () => {
         <Stack.Screen name="BES" component={BESdetails} />
         <Stack.Screen name="SJES" component={SJESdetails} />
         <Stack.Screen name="MGYM" component={MGYMDETAILS} />
+        <Stack.Screen name="BDRMMO" component={Bdrmmodetails} />
+        <Stack.Screen name="BANNEX" component={Bannexdetails} />
       </Stack.Navigator>
     </NavigationContainer>
   );

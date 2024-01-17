@@ -14,21 +14,27 @@ const MGYMDETAILS = () => {
         <Text style={styles.title}>MUNICIPAL GYMNASIUM</Text>
 
         <ScrollView>
-       
         <Image style={styles.image} source={require('../assets/gymna.png')}></Image>
-        <Text style={styles.txtloc}>Location:</Text><Text style={{fontSize:20, marginLeft: 10,}}>MUNICIPAL GYMNASIUM</Text>
+        <Text style={{
+          fontSize: 8,
+          fontStyle: 'italic',
+          textAlign: 'center'
+         }}>https://maps.app.goo.gl/NGgYfiF4NEumTfEV7</Text>
+
+        <Text style={styles.txtloc}>Location:</Text><Text style={{fontSize:20, marginLeft: 10,}}>Montalban (Rodriguez), Rodriguez, 1860 Rizal</Text>
       
-      <TouchableOpacity onPress={handleLocationClick}>
-      <Image
-        style={{
-        height: hp('10%'), 
-        width: wp('20%'),
-        alignSelf: 'center'
-       }}
-         source={require('../assets/location.png')}></Image>
+        <TouchableOpacity onPress={handleLocationClick}>
+        <Image
+                style={{
+                height: hp('10%'), 
+                width: wp('20%'),
+                alignSelf: 'center'
+            }} source={require('../assets/map.png')}>
+         </Image>
          </TouchableOpacity>
-        <Text style={styles.txtcapa}>Total Capacity:</Text><Text style={{fontSize:20, marginLeft: 10,}}>500</Text>
-        <Text style={styles.txtnum}>Contact Number:</Text><Text style={{fontSize:20, marginLeft: 10,}}>09123456789</Text>
+         
+        <Text style={styles.txtcapa}>Total Capacity:</Text><Text style={{fontSize:20, marginLeft: 10,}}></Text>
+        <Text style={styles.txtnum}>Contact Number:</Text><Text style={{fontSize:20, marginLeft: 10,}}></Text>
       
         </ScrollView>
       </View>

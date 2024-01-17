@@ -33,24 +33,24 @@ const HomePage = ({navigation}) => {
       Linking.openURL(url).catch((error) => console.error('Error opening URL: ', error));
       };
       const handleImageClick2 = () => {
-        const url = 'https://goo.gl/maps/L428Sv21yboe21yK8';
+        const url = 'https://maps.app.goo.gl/ZHbX7vvqJCeSbUxZ9';
           Linking.openURL(url).catch((error) => console.error('Error opening URL: ', error));
           };
           const handleImageClick3 = () => {
-            const url = 'https://goo.gl/maps/fKeXeqm7A3ZFVs1TA';
+            const url = 'https://maps.app.goo.gl/nYHpv92porMe3U1CA';
               Linking.openURL(url).catch((error) => console.error('Error opening URL: ', error));
               };
               const handleImageClick4 = () => {
-                const url = 'https://goo.gl/maps/7R5poj6BDnwNRmne9';
+                const url = 'https://maps.app.goo.gl/9uSEvFnFTktMobmR8';
                   Linking.openURL(url).catch((error) => console.error('Error opening URL: ', error));
                   };
-                  const handleImageClick5 = () => {
-                    const url = 'https://goo.gl/maps/EJb4FLxTX4mcabhx8';
-                      Linking.openURL(url).catch((error) => console.error('Error opening URL: ', error));
-                      };
+
 
     const createTwoButtonAlert = () =>
         Alert.alert('Request', 'Sent!');
+        
+        const createTwoButtonDislaimer= () =>
+        Alert.alert('Disclaimer', 'This type of request is only use for transportation request specially for persons with disabilities and senior citizen. It is not functions as a rescue request. This request may become delay. For emergency request please contact this specified contact number 09187883325.');
 
     const [activeTab, setActiveTab] = useState('Tab1');
 
@@ -76,7 +76,7 @@ const HomePage = ({navigation}) => {
         Address: input.Address,
         Contact: input.Contact
     }
-    axios.post('http://192.168.1.6:3001/create', newRequest)
+    axios.post('http://192.168.29.210:3001/create', newRequest)
   }
 
 
@@ -87,14 +87,14 @@ const HomePage = ({navigation}) => {
       <ImageBackground
         source={require('../assets/bg.png')}
         resizeMode="cover"
-        style={[styles.imageBackground, { width, height }]} // Use screen dimensions 
+        style={[styles.imageBackground, { width, height }]} 
         >
 
          
           <View style={styles.tabContent}>
             {activeTab === 'Tab1' && (
 
-              // HOMEPAGE && EVACUATION DETAILS
+              // HOMEPAGE
               <ScrollView>
          <View>
                   <Text style={styles.emsTITLE}>Evacuation Management System </Text>  
@@ -112,8 +112,7 @@ const HomePage = ({navigation}) => {
                   <Text style={styles.imgReferences}>Image Reference: https://www.nippon.com/en/in-depth/d00544/</Text>
               
                   <Text style={styles.emssource}>{'\n'}{'\n'}Our Services</Text>
-                  <Text style={styles.service}>At Evacuation Management, we offer a range of services to help you 
-                  and your organization prepare for any emergency. Here are some of the services we provide</Text>
+                  <Text style={styles.service}>This system is made to support the RA 10121 in a technological way. This system is most efficient in a managing pre-emtive evacuation and planning. At Evacuation Management, we offer a range of services to help you and your organization prepare for any emergency. Here are some of the services we provide </Text>
                   <Text style={styles.emsParagraph1}>{'\n'}Risk Assessments</Text>
                   <Text style={styles.service}>{'\n'}  Our team of experts will assess your organization's vulnerabilities and provide recommendations to mitigate risk.</Text>
                   <Image style={styles.image}source={require('../assets/builiding-evacuations.jpg')}></Image>       
@@ -126,15 +125,15 @@ const HomePage = ({navigation}) => {
                   <Image style={styles.image}source={require('../assets/ep.jpg')}></Image>       
                   <Text style={styles.imgReferences}>Image Reference: https://www.ishn.com/articles/112738-workplace-preparedness-planning-for-the-unexpected</Text>
                   
-                  <Text style={styles.contact}>{'\n'}{'\n'}Contact us:{'\n'}09705818869</Text>
-                  <Text style={styles.contact}>{'\n'}Located at:{'\n'}Rodriguez Rizal</Text>
+                  <Text>{'\n'}{'\n'}Contact us:{'\n'}09187883325</Text>
+                  <Text>{'\n'}Located at:{'\n'}Rodriguez Rizal</Text>
               
          </View>
               </ScrollView>
             )}
     
             {activeTab === 'Tab2' && (
-              // HOMEPAGE && EVACUATION DETAILS
+              // EVACUATION SITES DETAILS
               <ScrollView>
               <View>
                 <Text style={styles.evaclistTitle}>List of Evacuation Sites {'\n'}</Text>
@@ -154,8 +153,37 @@ const HomePage = ({navigation}) => {
                       /></TouchableOpacity>
                       <Text style={styles.styleDetails} onPress={() => navigation.navigate('RODRIGUEZ EC', {name: 'RECdetails'})}>Details</Text>
                      
+                      <Text style={styles.imagesLabel2}>SOUTHVILLE 8B BARANGAY ANNEX</Text>
+                      <TouchableOpacity onPress={handleImageClick4}>
+                      <Image
+                        style={{
+                          height: hp('20%'), 
+                          width: wp('80%'), 
+                          marginTop: 10,
+                          marginBottom: 10,
+                          alignItems: 'center',
+                        }}
+                        source={require('../assets/BANNEX.jpg')}
+                      /></TouchableOpacity>
+                      <Text style={styles.styleDetails} onPress={() => navigation.navigate('BANNEX', {name: 'Bannexdetails'})}>Details</Text>
+
+                      <Text style={styles.imagesLabel0}>SAN ISIDRO BARANGAY HALL COVERED COURT</Text>
+                      <TouchableOpacity onPress={handleImageClick2}>
+                      <Image
+                        style={{
+                          height: hp('20%'), 
+                          width: wp('80%'), 
+                          marginTop: 10,
+                          marginBottom: 10,
+                          alignItems: 'center',
+                        }}
+                        source={require('../assets/bdrrmo.png')}
+                      /></TouchableOpacity>
+                      <Text style={styles.styleDetails} onPress={() => navigation.navigate('BDRMMO', {name: 'Bdrrmodetails'})}>Details</Text>
+
+
                       <Text style={styles.imagesLabel2}>MUNICIPAL GYMNASIUM</Text>
-                      <TouchableOpacity onPress={handleImageClick}>
+                      <TouchableOpacity onPress={handleImageClick3}>
                       <Image
                         style={{
                           height: hp('20%'), 
@@ -214,7 +242,7 @@ const HomePage = ({navigation}) => {
 
                       <TouchableOpacity
                         style={[styles.tab, activeTab === 'Tab3' && styles.activeTab]}
-                        onPress={() => handleTabPress('Tab3')}
+                        onPress={() => {handleTabPress('Tab3'); createTwoButtonDislaimer();}} 
                       >
                         <Image style={styles.reqIMG}
                         source={require('../assets/medical-service.png')}>
@@ -243,7 +271,7 @@ const HomePage = ({navigation}) => {
 };
 
 
-//Styles
+//styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -274,8 +302,8 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   reqImage: {
-    height: hp('20%'), // Adjust the percentage as needed
-    width: wp('80%'), // Adjust the percentage as needed
+    height: hp('20%'), 
+    width: wp('80%'), 
     marginTop: "20%",
     marginBottom: "50%",
     alignItems: 'center',
@@ -287,10 +315,10 @@ const styles = StyleSheet.create({
     color: '#002D62'
   },
   styleDetails:{
-    textAlign: 'center',
     fontSize: 18,
-    marginTop: 10,
-    color: '#002D62'
+    marginTop: 5,
+    color: '#002D62',
+    textAlign: 'center'
   },
   emsABOUT: {
     fontSize: 15,
@@ -355,8 +383,8 @@ const styles = StyleSheet.create({
   },
   tabDrawer: {
     flexDirection: 'row',
-    borderBottomWidth: 0,
-    paddingBottom: 20 ,
+    borderBottomWidth: 3,
+    paddingBottom: 5,
     backgroundColor: 'rgba(52, 52, 52, alpha)',
   },
   tab: {
@@ -383,10 +411,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   }, 
    image: {
-    height: hp('25%'), // Adjust the percentage as needed
-    width: wp('80%'), // Adjust the percentage as needed
+    height: hp('25%'), 
+    width: wp('80%'), 
     marginBottom: 10,
     alignItems: 'center',
+  },
+  imagesLabel0: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontStyle: 'italic',
+    paddingTop: "5%"
   },
   imagesLabel: {
     fontSize: 14,

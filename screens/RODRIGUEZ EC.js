@@ -25,7 +25,7 @@ const RECdetails = () => {
           textAlign: 'center'
          }}>https://upload.wikimedia.org/wikipedia/commons/8/8d/Permanent_Evacuation_Center_in_Rodriguez%2C_Rizal_Province%2C_Philippines.jpg</Text>
         
-        <Text style={styles.txtloc}>Location:</Text><Text style={{fontSize:20, marginLeft: 10,}}>Rodriguez Evacuation Center, P4WH+2W8, Rodriguez, Rizal</Text>
+        <Text style={styles.txtloc}>Location:</Text><Text style={{fontSize:20, marginLeft: 10,}}> P4WH+2W8, Rodriguez, Rizal</Text>
         <TouchableOpacity onPress={handleLocationClick}>
       <Image
         style={{
@@ -33,10 +33,10 @@ const RECdetails = () => {
         width: wp('25.5%'),
         alignSelf: 'center'
        }}
-         source={require('../assets/location.png')}></Image>
+       source={require('../assets/map.png')}></Image>
       </TouchableOpacity>
-        <Text style={styles.txtcapa}>Total Capacity:</Text><Text style={{fontSize:20, marginLeft: 10,}}>9000</Text>
-        <Text style={styles.txtnum}>Contact Number:</Text><Text style={{fontSize:20, marginLeft: 10,}}>09123456789</Text>
+        <Text style={styles.txtcapa}>Total Capacity:</Text><Text style={{fontSize:20, marginLeft: 10,}}></Text>
+        <Text style={styles.txtnum}>Contact Number:</Text><Text style={{fontSize:20, marginLeft: 10,}}></Text>
         
         </ScrollView>
       </View>
